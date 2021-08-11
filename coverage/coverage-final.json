@@ -1,0 +1,2 @@
+{"/Users/garrettestrin/code/gatsby-ts/src/Components/Hero/Hero.tsx": {"path":"/Users/garrettestrin/code/gatsby-ts/src/Components/Hero/Hero.tsx","statementMap":{"0":{"start":{"line":5,"column":2},"end":{"line":9,"column":4}}},"fnMap":{"0":{"name":"Hero","decl":{"start":{"line":4,"column":9},"end":{"line":4,"column":13}},"loc":{"start":{"line":4,"column":16},"end":{"line":10,"column":1}},"line":4}},"branchMap":{},"s":{"0":1},"f":{"0":1},"b":{},"_coverageSchema":"1a1c01bbd47fc00a2c39e90264f33305004495a9","hash":"ab2b46896454f990acf5f308089b9a0316e8fef4"}
+}
