@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
+        - id: keydb
+          uses: pozetroninc/github-action-get-latest-release@master
+          with:
+            repository: ${{ github.repository }}
         - name: Check out repository
           uses: actions/checkout@v2
         - name: Checkout dev branch
@@ -17,4 +21,7 @@ jobs:
           with:
             node-version: '14'
         - run: npm install --no-package-lock --no-save @actions/core @actions/github
-        - run: node ./.github/actions/addFixVersionToJiraIssue.js
+        - name: Run fix version script
+          run: node ./.github/actions/addFixVersionToJiraIssue.js
+          with:
+            latestRelease: ${{ steps.keydb.outputs.release }}
