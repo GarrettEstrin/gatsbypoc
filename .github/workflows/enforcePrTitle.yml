@@ -1,0 +1,16 @@
+name: Enforce PR Title
+on:
+  pull_request:
+    branches:
+    - 'dev'
+    types: [opened, edited, synchronize, reopened]
+jobs:
+  enforceprtitle:
+    name: 'Enforce PR Title'
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: deepakputhraya/action-pr-title@master
+      with:
+        regex: '[[]([a-zA-z])+[-]([0-9])+[\]]' #match jira ticket number eg [web-30]
+  
