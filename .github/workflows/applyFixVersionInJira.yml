@@ -20,8 +20,6 @@ jobs:
         - uses: actions/setup-node@v2
           with:
             node-version: '14'
-        - run: npm install --no-package-lock --no-save @actions/core @actions/github
+        - run: npm install --no-package-lock --no-save @actions/github
         - name: Run fix version script
-          run: node ./.github/actions/addFixVersionToJiraIssue.js
-          with:
-            latestRelease: ${{ steps.keydb.outputs.release }}
+          run: LATEST_RELEASE=${{ steps.keydb.outputs.release }} node ./.github/actions/addFixVersionToJiraIssue.js
