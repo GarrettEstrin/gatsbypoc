@@ -1,6 +1,8 @@
 name: Enforce PR Title
 on:
   pull_request:
+    branches:
+    - 'dev'
     types: [opened, edited, synchronize, reopened]
 jobs:
   enforceprtitle:
