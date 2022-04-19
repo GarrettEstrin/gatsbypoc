@@ -13,4 +13,4 @@ jobs:
           with:
             node-version: '14'
         - run: npm install --no-package-lock --no-save @actions/core @actions/github
-        - run: node ./github/actions/addFixVersionToJiraIssue.js
+        - run: node ./.github/actions/addFixVersionToJiraIssue.js
