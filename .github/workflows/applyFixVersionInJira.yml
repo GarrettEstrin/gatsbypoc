@@ -1,0 +1,16 @@
+name: Add Fix Version to Jira Issue
+on:
+  push:
+    branches:
+    - 'dev'
+jobs:
+  addfixversiontojiraissue:
+    name: 'Add Fix Version to Jira Issue'
+    runs-on: ubuntu-latest
+  
+    steps:
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+        - run: npm install --no-package-lock --no-save @actions/core @actions/github
+        - run: node .github/actions/addFixVersionToJiraIssue.js
