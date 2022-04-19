@@ -1,15 +1,17 @@
 const github = require('@actions/github');
+const request = require('request');
 
 const message = github.context.payload.head_commit.message;
 const repoName = github.context.payload.repository.name;
 const latestRelease = process.env.LATEST_RELEASE;
-console.log(github.context);
+const auth = process.env.AUTH;
+const projectId = process.env.PROJECT_ID;
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
 
 function extractSubstring(str) {
-  var rx = issueIdRegex;
-  var arr = rx.exec(str);
-  return arr[0]; 
+  const rx = issueIdRegex;
+  const arr = rx.exec(str);
+  return arr[0].replace('[', '').replace(']', ''); 
 }
 
 function getNextReleaseTag(currentRelease) {
@@ -21,8 +23,43 @@ function getNextReleaseTag(currentRelease) {
   return `${parseInt(splitRelease[0]) + 1}.0.0`
 }
 
+function addFixVersionToIssue() {
+  var options = {
+    'method': 'PUT',
+    'url': `https://kgedev.atlassian.net/rest/api/3/issue/${issueId}`,
+    'headers': {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': `Basic ${auth}`,
+    },
+    body: `{"update": {"fixVersions": [{"add": {"name": "${fixVersion}"}}]}}`
+
+  };
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+  });
+}
+
+function createFixVersion() {
+  var options = {
+    'method': 'POST',
+    'url': 'https://kgedev.atlassian.net/rest/api/3/version',
+    'headers': {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': `Basic ${auth}`
+    },
+    body: `{"name": "${fixVersion}", "projectId": ${projectId}}`
+
+  };
+  request(options, function (error, response) {
+    addFixVersionToIssue();
+  });
+}
+
 const issueId = extractSubstring(message);
 const fixVersion = `${repoName}_${getNextReleaseTag(latestRelease)}`;
 
-console.log({ issueId, fixVersion });
+createFixVersion();
+
+
 
