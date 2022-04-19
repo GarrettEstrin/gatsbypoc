@@ -2,7 +2,7 @@ const github = require('@actions/github');
 
 const message = github.context.payload.head_commit.message;
 const latestRelease = process.env.LATEST_RELEASE;
-console.log({ latestRelease });
+console.log(github.context);
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
 
 function extractSubstring(str) {
@@ -21,6 +21,5 @@ function getNextReleaseTag(currentRelease) {
 }
 
 const issueId = extractSubstring(message);
-const nextRelease = getNextReleaseTag(latestRelease);
+const fixVersion = getNextReleaseTag(latestRelease);
 
-console.log({issueId, nextRelease});
