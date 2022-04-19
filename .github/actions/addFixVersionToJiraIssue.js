@@ -1,6 +1,7 @@
 const github = require('@actions/github');
 
 const message = github.context.payload.head_commit.message;
+const repoName = github.context.payload.repository.name;
 const latestRelease = process.env.LATEST_RELEASE;
 console.log(github.context);
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
@@ -21,5 +22,7 @@ function getNextReleaseTag(currentRelease) {
 }
 
 const issueId = extractSubstring(message);
-const fixVersion = getNextReleaseTag(latestRelease);
+const fixVersion = `${repoName}_${getNextReleaseTag(latestRelease)}`;
+
+console.log({ issueId, fixVersion });
 
