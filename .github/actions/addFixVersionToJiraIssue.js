@@ -2,6 +2,7 @@ const github = require('@actions/github');
 
 const message = github.context.payload.head_commit.message;
 const latestRelease = process.env.LATEST_RELEASE;
+console.log({ latestRelease });
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
 
 function extractSubstring(str) {
