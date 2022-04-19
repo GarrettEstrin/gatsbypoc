@@ -1,9 +1,7 @@
-const core = require("@actions/core");
 const github = require('@actions/github');
 
-// const message = github.context.payload.head_commit.message;
-const message = 'Merge pull request #7 from GarrettEstrin/test-1\n\n[test-1]';
-const latestRelease = core.getInput('latestRelease');
+const message = github.context.payload.head_commit.message;
+const latestRelease = process.env.LATEST_RELEASE;
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
 
 function extractSubstring(str) {
