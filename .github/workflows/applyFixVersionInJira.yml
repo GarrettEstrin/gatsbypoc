@@ -18,4 +18,4 @@ jobs:
             node-version: '14'
         - run: npm install --no-package-lock --no-save @actions/github request
         - name: Run fix version script
-          run: LATEST_RELEASE=${{GITHUB_REF#refs/*/}} AUTH=${{ secrets.JIRA_AUTH}} PROJECT_ID=${{ secrets.JIRA_PROJECT_ID}} node ./.github/actions/addFixVersionToJiraIssue.js
+          run: LATEST_RELEASE=${{github}} AUTH=${{ secrets.JIRA_AUTH}} PROJECT_ID=${{ secrets.JIRA_PROJECT_ID}} node ./.github/actions/addFixVersionToJiraIssue.js
