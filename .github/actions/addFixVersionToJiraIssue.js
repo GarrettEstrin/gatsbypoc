@@ -58,7 +58,7 @@ function createFixVersion() {
 
 const issueId = extractSubstring(message);
 const fixVersion = `${repoName}_${getNextReleaseTag(latestRelease)}`;
-
+console.log({ fixVersion });
 createFixVersion();
 
 
