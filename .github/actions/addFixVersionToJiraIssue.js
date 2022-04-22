@@ -7,7 +7,7 @@ const latestRelease = process.env.LATEST_RELEASE;
 const auth = process.env.AUTH;
 const projectId = process.env.PROJECT_ID;
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
-console.log({latestRelease});
+console.log(JSON.stringify(latestRelease));
 function extractSubstring(str) {
   const rx = issueIdRegex;
   const arr = rx.exec(str);
