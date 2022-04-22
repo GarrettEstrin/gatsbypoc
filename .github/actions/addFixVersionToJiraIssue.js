@@ -7,7 +7,7 @@ const latestRelease = process.env.LATEST_RELEASE;
 const auth = process.env.AUTH;
 const projectId = process.env.PROJECT_ID;
 const issueIdRegex = /[[]([a-zA-z])+[-]([0-9])+[\]]/;
-
+console.log(latestRelease);
 function extractSubstring(str) {
   const rx = issueIdRegex;
   const arr = rx.exec(str);
@@ -58,7 +58,7 @@ function createFixVersion() {
 
 const issueId = extractSubstring(message);
 const fixVersion = `${repoName}_${getNextReleaseTag(latestRelease)}`;
-console.log({ fixVersion });
+
 createFixVersion();
 
 
